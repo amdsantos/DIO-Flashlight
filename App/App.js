@@ -1,12 +1,31 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 const App = () => {
-  const toggle = false;
+  const [toggle, setToggle] = useState(false);
+
+  const handleChangeToggle = () => setToggle(oldToggle => !oldToggle);
 
   return (
     <View style={toggle ? style.containerLight : style.container}>
-      <Image source={require()} />;
+      <TouchableOpacity onPress={handleChangeToggle}>
+        <Image
+          style={toggle ? style.lightOn : style.lightOff}
+          source={
+            toggle
+              ? require('./assets/icons/eco-light.png')
+              : require('./assets/icons/eco-light-off.png')
+          }
+        />
+        <Image
+          style={style.logoDio}
+          source={
+            toggle
+              ? require('./assets/icons/logo-dio.png')
+              : require('./assets/icons/logo-dio-white.png')
+          }
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -25,5 +44,24 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  lightOn: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  lightOff: {
+    width: 150,
+    height: 150,
+    tintColor: 'white',
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  logoDio: {
+    width: 250,
+    height: 250,
+    resizeMode: 'contain',
+    alignItems: 'center',
   },
 });
